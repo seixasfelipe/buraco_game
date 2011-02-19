@@ -1,9 +1,8 @@
 Dado /^que eu ainda nao estou jogando$/ do
-  pending # express the regexp above with the code you wish you had
 end
 
 Quando /^eu comecar um novo jogo$/ do
-  pending # express the regexp above with the code you wish you had
+  Buraco::Game.new.start
 end
 
 Entao /^eu deveria ver "([^"]*)"$/ do |arg1|
