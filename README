@@ -1,7 +1,22 @@
 Biblioteca contendo logica do jogo de cartas chamado: Buraco
 
-- Quando o jogo começa é perguntado para o jogador qual o nome dele, após inserido o nome o jogo começa
-- O jogador recebe 11 cartas de baralho
-- O jogador compra uma carta
-- É solicitada uma ação ao jogador: qual carta ele deseja descartar?
-- Após o descarte, o jogador compra uma carta
+
+Estorias:
+
+- O jogador começa o jogo de Buraco
+- O jogador recebe 11 cartas
+- O jogador compra 1 carta do monte
+- O jogador descarta 1 carta da mão
+- O jogador pega todas as cartas da mesa e é obrigado a deixar 1 carta na mesa
+- O jogador baixa jogos com as cartas da sua mão para a mesa
+- O jogador ganha o jogo terminando todas as cartas da sua mão
+- O jogador joga novamente
+
+
+
+Release 01:
+
+- O jogador começa o jogo de Buraco
+- O jogador recebe 11 cartas
+- O jogador compra 1 carta do monte
+- O jogador baixa jogos com as cartas da sua mão para a mesa
