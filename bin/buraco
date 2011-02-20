@@ -2,5 +2,5 @@
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'buraco'
 
-game = Buraco::Game.new(STDOUT)
+game = Buraco::Game.new(STDOUT, STDIN)
 game.start

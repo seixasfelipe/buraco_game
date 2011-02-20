@@ -11,3 +11,5 @@ Cenario: comecar o jogo
   Quando eu comecar um novo jogo
   Entao eu deveria ver "Bem vindo ao jogo de Buraco!"
   E eu deveria ver "Jogador, digite o seu nome:"
+  E eu deveria digitar "<nome>"
+  E eu deveria ver "Oi <nome>!"
