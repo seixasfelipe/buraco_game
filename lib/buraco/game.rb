@@ -12,10 +12,15 @@ module Buraco
       @output.puts 'Bem vindo ao jogo de Buraco!'
       @output.puts 'Jogador, digite o seu nome:'
 
-      player_name = @input.gets
-      @output.puts "Oi #{player_name}!"
-
-      @player = Buraco::Player.new(player_name)
+      @player = create_new_player(@input.gets)
+      
+      @output.puts "Oi #{@player.name}!"
     end
+
+    def create_new_player(player_name)
+      player = Buraco::Player.new(player_name)
+    end
+
+
   end
 end
