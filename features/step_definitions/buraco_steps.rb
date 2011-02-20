@@ -46,11 +46,12 @@ Entao /^eu deveria digitar "([^"]*)"$/ do |name|
 end
 
 Dado /^que eu comecei o jogo$/ do
-  pending
+  game.start
+  game.player.should_not be_nil
 end
 
 Quando /^estou sem cartas na mao$/ do
-  pending # express the regexp above with the code you wish you had
+  pending #game.current_player.hands.should be_empty?
 end
 
 Entao /^eu deveria receber (\d+) cartas aleatorias$/ do |arg1|

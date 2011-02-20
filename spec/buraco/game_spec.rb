@@ -32,7 +32,25 @@ module Buraco
         
         game.start
       end
-
     end
+
+    describe "#play" do
+    
+      let(:input) { double('input').as_null_object }
+      let(:output) { double('output').as_null_object }
+      let(:game) { Game.new(output, input) }
+
+      it "so comeca o jogo com pelo menos 1 jogador" do
+        input.should_receive(:gets).and_return('Josicreia')
+
+        game.start
+
+        game.player.should_not be_nil
+      end
+
+      it "o jogador comeca sem cartas na mao"
+      it "o jogador recebe 11 cartas"
+    end
+
   end
 end
