@@ -1,5 +1,6 @@
 # language: pt
 
+@release_01
 Funcionalidade: o jogador comeca o jogo de Buraco
 
   Como um jogador

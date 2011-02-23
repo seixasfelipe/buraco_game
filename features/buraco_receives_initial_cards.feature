@@ -1,5 +1,6 @@
 # language: pt
 
+@release_01
 Funcionalidade: o jogador recebe 11 cartas
 
   O jogador recebe 11 cartas iniciais providos por 2 baralhos.

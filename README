@@ -4,6 +4,8 @@ Biblioteca contendo logica do jogo de cartas chamado: Buraco
 Estorias:
 
 - O jogador começa o jogo de Buraco
+- O jogo embaralha as cartas do baralho
+- O jogo separa o morto
 - O jogador recebe 11 cartas
 - O jogador compra 1 carta do monte
 - O jogador descarta 1 carta da mão
@@ -17,6 +19,18 @@ Estorias:
 Release 01:
 
 - O jogador começa o jogo de Buraco
+- O jogo embaralha as cartas do baralho
 - O jogador recebe 11 cartas
 - O jogador compra 1 carta do monte
 - O jogador baixa jogos com as cartas da sua mão para a mesa
+
+
+
+* Para executar os testes:
+cucumber --tags @release_01
+rspec spec --color --format doc
+
+
+
+TODO:
+- colocar a execucao dos testes via rake tasks
