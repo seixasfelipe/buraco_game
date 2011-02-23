@@ -40,16 +40,26 @@ module Buraco
       let(:output) { double('output').as_null_object }
       let(:game) { Game.new(output, input) }
 
-      it "so comeca o jogo com pelo menos 1 jogador" do
+      before(:each) do
         input.should_receive(:gets).and_return('Josicreia')
 
         game.start
+      end
 
+
+      it "so comeca o jogo com pelo menos 1 jogador" do
         game.player.should_not be_nil
       end
 
-      it "o jogador comeca sem cartas na mao"
-      it "o jogador recebe 11 cartas"
+      it "o jogador comeca sem cartas na mao" do
+        game.player.hand_cards.should be_empty
+      end
+
+      it "o jogador recebe 11 cartas" do
+        game.give 11, :to => game.player
+        game.player.hand_cards.should have_exactly(11).items
+      end
+
     end
 
   end

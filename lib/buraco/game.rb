@@ -21,6 +21,13 @@ module Buraco
       player = Buraco::Player.new(player_name)
     end
 
+    def give(cards_quantity, options={})
+      player = options[:to]
+
+      (1..cards_quantity).each do |c|
+        player.hand_cards << 1
+      end
+    end
 
   end
 end

@@ -51,10 +51,10 @@ Dado /^que eu comecei o jogo$/ do
 end
 
 Quando /^estou sem cartas na mao$/ do
-  pending #game.current_player.hands.should be_empty?
+  game.player.hand_cards.should be_empty
 end
 
-Entao /^eu deveria receber (\d+) cartas aleatorias$/ do |arg1|
-  pending # express the regexp above with the code you wish you had
+Entao /^eu deveria receber (\d+) cartas aleatorias$/ do |cards_quantity|
+  game.give cards_quantity.to_i, :to => game.player
+  game.player.hand_cards.should have_exactly(cards_quantity.to_i).items
 end
-
