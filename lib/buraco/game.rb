@@ -1,7 +1,7 @@
 module Buraco
   class Game
 
-    attr_accessor :player  
+    attr_accessor :player, :deck  
 
     def initialize(output, input)
       @output = output
@@ -15,6 +15,8 @@ module Buraco
       @player = create_new_player(@input.gets)
       
       @output.puts "Oi #{@player.name}!"
+
+      @deck = Deck.new
     end
 
     def create_new_player(player_name)

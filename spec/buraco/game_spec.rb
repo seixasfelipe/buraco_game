@@ -34,6 +34,15 @@ module Buraco
       end
     end
 
+    describe "#shuffle deck" do
+
+      it "deveria ter 1 deck com 2 baralhos"
+      it "deveria ter cartas de A a K sem o Joker"
+      it "deveria ordenar o baralho"
+      it "deveria embaralhar as cartas"
+
+    end
+
     describe "#play" do
     
       let(:input) { double('input').as_null_object }

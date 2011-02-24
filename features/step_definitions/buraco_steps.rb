@@ -58,3 +58,12 @@ Entao /^eu deveria receber (\d+) cartas aleatorias$/ do |cards_quantity|
   game.give cards_quantity.to_i, :to => game.player
   game.player.hand_cards.should have_exactly(cards_quantity.to_i).items
 end
+
+Quando /^o baralho nao estiver embaralhado$/ do
+  game.deck.shuffled?.should be_true
+end
+
+Entao /^o jogo deveria embaralhar o baralho$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
