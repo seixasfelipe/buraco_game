@@ -1,3 +1,5 @@
 require 'buraco/game'
 require 'buraco/player'
 require 'buraco/deck'
+require 'buraco/deck_helper'
+require 'buraco/card'

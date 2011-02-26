@@ -35,10 +35,33 @@ module Buraco
     end
 
     describe "#shuffle deck" do
+      
+      let(:input) { double('input').as_null_object }
+      let(:output) { double('output').as_null_object }
+      let(:game) { Game.new(output, input) }
 
-      it "deveria ter 1 deck com 2 baralhos"
-      it "deveria ter cartas de A a K sem o Joker"
-      it "deveria ordenar o baralho"
+
+      before(:each) do
+        input.should_receive(:gets).and_return('Josicreia')
+
+        game.start
+      end
+
+      it "deveria ter 1 deck com 2 baralhos com 52 cartas cada" do
+        game.deck.cards.should have_exactly(104).items
+      end
+
+      it "deveria ter 13 cartas de copas de A a K em cada baralho" do
+        cards = DeckHelper.select game.deck.cards, :suit => :hearts
+
+        heart_cards = Array.new
+        (0..1).inject(0) do |heart_cards, index|
+          heart_cards << DeckHelper.create_cards(:of => :hearts)
+        end
+
+        cards.should be_eql hearts_cards
+      end
+
       it "deveria embaralhar as cartas"
 
     end
