@@ -21,29 +21,27 @@ module Buraco
       ]
     end
 
+    def cards_expectation_of(suit)
+        cards = DeckHelper.create_cards :of => suit
+        cards.should have_exactly(13).cards
+        cards.should be_eql get_cards :of => suit
+    end
+
     describe "#create_cards" do
       it "deveria criar cartas de A a K dado um naipe - copas" do
-        cards = DeckHelper.create_cards :of => :hearts
-        cards.should have_exactly(13).cards
-        cards.should be_eql get_cards :of => :hearts
+        cards_expectation_of(:hearts)
       end
 
       it "deveria criar cartas de A a K dado um naipe - ouros" do
-        cards = DeckHelper.create_cards :of => :diamonds
-        cards.should have_exactly(13).cards
-        cards.should be_eql get_cards :of => :diamonds
+        cards_expectation_of(:diamonds)
       end
 
       it "deveria criar cartas de A a K dado um naipe - paus" do
-        cards = DeckHelper.create_cards :of => :clubs
-        cards.should have_exactly(13).cards
-        cards.should be_eql get_cards :of => :clubs
+        cards_expectation_of(:clubs)
       end
 
       it "deveria criar cartas de A a K dado um naipe - espadas" do
-        cards = DeckHelper.create_cards :of => :spades
-        cards.should have_exactly(13).cards
-        cards.should be_eql get_cards :of => :spades
+        cards_expectation_of(:spades)
       end
     end
 
