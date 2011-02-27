@@ -50,16 +50,39 @@ module Buraco
       it "deveria ter 1 deck com 2 baralhos com 52 cartas cada" do
         game.deck.cards.should have_exactly(104).items
       end
+      
+      it "cada carta do deck deveria ser do tipo Buraco::Card" do
+        game.deck.cards[0].should be_is_a Buraco::Card
+      end
+
+      it "deveria ter no deck 26 cartas do naipe - copas" do
+        cards = DeckHelper.select game.deck.cards, :of => :hearts
+        cards.should have_exactly(26).cards
+      end
+
+      it "deveria ter no deck 26 cartas do naipe - ouros" do
+        cards = DeckHelper.select game.deck.cards, :of => :diamonds
+        cards.should have_exactly(26).cards
+      end
+
+      it "deveria ter no deck 26 cartas do naipe - paus" do
+        cards = DeckHelper.select game.deck.cards, :of => :clubs
+        cards.should have_exactly(26).cards
+      end
+
+      it "deveria ter no deck 26 cartas do naipe - espadas" do
+        cards = DeckHelper.select game.deck.cards, :of => :spades
+        cards.should have_exactly(26).cards
+      end
 
       it "deveria ter 13 cartas de copas de A a K em cada baralho" do
-        cards = DeckHelper.select game.deck.cards, :suit => :hearts
+        cards = DeckHelper.select game.deck.cards, :of => :hearts
 
-        heart_cards = Array.new
-        (0..1).inject(0) do |heart_cards, index|
+        (0..1).inject(Array.new) do |heart_cards, index|
           heart_cards << DeckHelper.create_cards(:of => :hearts)
         end
 
-        cards.should be_eql hearts_cards
+        cards.should be_eql heart_cards
       end
 
       it "deveria embaralhar as cartas"
