@@ -75,17 +75,16 @@ module Buraco
         cards.should have_exactly(26).cards
       end
 
-      it "deveria ter 13 cartas de copas de A a K em cada baralho" do
-        cards = DeckHelper.select game.deck.cards, :of => :hearts
-
-        (0..1).inject(Array.new) do |heart_cards, index|
-          heart_cards << DeckHelper.create_cards(:of => :hearts)
-        end
-
-        cards.should be_eql heart_cards
+      it "deveria ter as cartas desembaralhadas quando o deck for criado" do
+        game.deck.shuffled?.should be_false
       end
 
-      it "deveria embaralhar as cartas"
+      it "deveria embaralhar as cartas" do
+        initial_cards = game.deck.cards.clone
+        game.deck.shuffle
+        game.deck.shuffled?.should be_true
+        game.deck.cards.should_not be_eql initial_cards
+      end
 
     end
 

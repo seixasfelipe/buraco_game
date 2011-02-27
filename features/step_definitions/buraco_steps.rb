@@ -60,10 +60,11 @@ Entao /^eu deveria receber (\d+) cartas aleatorias$/ do |cards_quantity|
 end
 
 Quando /^o baralho nao estiver embaralhado$/ do
-  game.deck.shuffled?.should be_true
+  game.deck.shuffled?.should be_false
 end
 
 Entao /^o jogo deveria embaralhar o baralho$/ do
-  pending # express the regexp above with the code you wish you had
+  game.shuffle_deck
+  game.deck.shuffled?.should be_true
 end
 

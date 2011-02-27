@@ -19,6 +19,10 @@ module Buraco
       @deck = Deck.new
     end
 
+    def shuffle_deck
+      @deck.shuffle
+    end
+
     def create_new_player(player_name)
       player = Buraco::Player.new(player_name)
     end
