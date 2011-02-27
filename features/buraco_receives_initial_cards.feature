@@ -9,4 +9,5 @@ Funcionalidade: o jogador recebe 11 cartas
 Cenario: distribuir cartas iniciais
   Dado que eu comecei o jogo
   Quando estou sem cartas na mao
-  Entao eu deveria receber 11 cartas aleatorias
+  Entao eu deveria receber 11 cartas aleatorias removendo-as do topo do deck
+  E as cartas deveriam conter naipes e valores de A a K

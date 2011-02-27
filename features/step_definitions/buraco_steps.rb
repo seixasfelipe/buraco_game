@@ -54,9 +54,19 @@ Quando /^estou sem cartas na mao$/ do
   game.player.hand_cards.should be_empty
 end
 
-Entao /^eu deveria receber (\d+) cartas aleatorias$/ do |cards_quantity|
+Entao /^eu deveria receber (\d+) cartas aleatorias removendo\-as do topo do deck$/ do |cards_quantity|
+  count = game.deck.count
   game.give cards_quantity.to_i, :to => game.player
-  game.player.hand_cards.should have_exactly(cards_quantity.to_i).items
+  game.player.hand_cards.should have_exactly(cards_quantity.to_i).cards
+  game.deck.should have_exactly(count - cards_quantity.to_i).cards
+end
+
+Entao /^as cartas deveriam conter naipes e valores de A a K$/ do
+  game.player.hand_cards.map do |c|
+    c.suit.nil?.should be_false
+    c.value.should >= 1
+    c.value.should <= 13
+  end
 end
 
 Quando /^o baralho nao estiver embaralhado$/ do

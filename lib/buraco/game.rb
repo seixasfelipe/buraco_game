@@ -31,7 +31,7 @@ module Buraco
       player = options[:to]
 
       (1..cards_quantity).each do |c|
-        player.hand_cards << 1
+        player.hand_cards << @deck.pick_card 
       end
     end
 

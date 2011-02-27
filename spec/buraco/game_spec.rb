@@ -48,7 +48,7 @@ module Buraco
       end
 
       it "deveria ter 1 deck com 2 baralhos com 52 cartas cada" do
-        game.deck.cards.should have_exactly(104).items
+        game.deck.count.should == 104
       end
       
       it "cada carta do deck deveria ser do tipo Buraco::Card" do
@@ -112,6 +112,13 @@ module Buraco
       it "o jogador recebe 11 cartas" do
         game.give 11, :to => game.player
         game.player.hand_cards.should have_exactly(11).items
+      end
+
+      it "deveria sair do topo do deck as cartas distribuidas" do
+        count = game.deck.count
+        cards_num = 1
+        game.give cards_num, :to => game.player
+        game.deck.count.should == (count - cards_num)
       end
 
     end

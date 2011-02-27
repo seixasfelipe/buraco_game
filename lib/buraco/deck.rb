@@ -18,15 +18,22 @@ module Buraco
       cards
     end
 
+    def count
+      @cards.size
+    end
+
     def shuffled?
       @is_shuffled = false if @is_shuffled.nil?
-
       @is_shuffled      
     end
 
     def shuffle
       @cards.shuffle!
       @is_shuffled = true
+    end
+
+    def pick_card
+      @cards.pop
     end
 
   end
