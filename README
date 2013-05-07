@@ -33,4 +33,8 @@ rspec spec --color --format doc
 
 
 TODO:
-- colocar a execucao dos testes via rake tasks
+- colocar a execucao dos testes via rake tasks [DONE]
+- improve readability:
+  game.team.one.players
+  game.team.one.points
+  game.team.one.player.one.name
