@@ -31,6 +31,13 @@ module Buraco
         state_machine.current.should be_eql :start_game
       end
 
+      it "deveria mudar de jogador ao comecar o jogo" do
+        state_machine.skip_to :start_game
+        state_machine.next
+
+        state_machine.current.should be_eql :change_player
+      end
+
       it "deveria permanecer no mesmo estado caso nao exista o estado solicitado" do
         state_machine.current.should be_eql :new_deck
         state_machine.next :invalid_state
@@ -49,7 +56,7 @@ module Buraco
     describe "#player states" do
 
       it "deveria comprar uma carta pelo jogador da vez" do
-        state_machine.skip_to :start_game
+        state_machine.skip_to :change_player
         state_machine.next
 
         state_machine.current.should be_eql :draw_card
