@@ -55,11 +55,23 @@ module Buraco
         state_machine.current.should be_eql [:discard_card, :play_cards]
       end
 
-      it "deveria mudar de jogador OU terminar o jogo OU comprar o morto APOS descartar uma carta" do
+      it "deveria mudar de jogador OU terminar o jogo OU comprar o morto \
+          APOS descartar uma carta" do
         state_machine.skip_to :draw_card
         state_machine.next :discard_card
 
-        state_machine.current.should be_eql [:change_player, :end_game, :draw_dead_cards]
+        state_machine.current.should be_eql [:change_player, :end_game, 
+          :draw_dead_cards]
+      end
+
+      it "deveria descer um jogo OU descartar uma carta OU comprar o morto \
+          OU terminar o jogo APOS descer um jogo" do
+        state_machine.skip_to :draw_card
+        state_machine.next :play_cards
+
+        state_machine.current.should be_eql [:play_cards, :discard_card, 
+          :draw_dead_cards, :end_game]
+
       end
 
     end

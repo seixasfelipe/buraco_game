@@ -10,7 +10,8 @@ module Buraco
         give_players_cards: :start_game,
         start_game:         :draw_card,
         draw_card:          [:discard_card, :play_cards],
-        discard_card:       [:change_player, :end_game, :draw_dead_cards]
+        discard_card:       [:change_player, :end_game, :draw_dead_cards],
+        play_cards:         [:play_cards, :discard_card, :draw_dead_cards, :end_game]
       }
       @current_state = :new_deck
     end
