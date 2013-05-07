@@ -36,6 +36,13 @@ module Buraco
         state_machine.next :invalid_state
         state_machine.current.should be_eql :new_deck
       end
+
+      it "deveria contar os pontos quando o jogo terminar" do
+        state_machine.skip_to :end_game
+        state_machine.next
+
+        state_machine.current.should be_eql :calculate_points
+      end
     end
 
 
@@ -48,11 +55,11 @@ module Buraco
         state_machine.current.should be_eql :draw_card
       end
 
-      it "deveria descartar uma carta OU descer um jogo APOS comprar uma carta" do
+      it "deveria descer um jogo OU descartar uma carta APOS comprar uma carta" do
         state_machine.skip_to :draw_card
         state_machine.next
         
-        state_machine.current.should be_eql [:discard_card, :play_cards]
+        state_machine.current.should be_eql [:play_cards, :discard_card]
       end
 
       it "deveria mudar de jogador OU terminar o jogo OU comprar o morto \
@@ -71,7 +78,13 @@ module Buraco
 
         state_machine.current.should be_eql [:play_cards, :discard_card, 
           :draw_dead_cards, :end_game]
+      end
 
+      it "deveria descer um jogo OU descartar uma carta APOS comprar o morto" do
+        state_machine.skip_to :draw_dead_cards
+        state_machine.next
+
+        state_machine.current.should be_eql [:play_cards, :discard_card]
       end
 
     end
