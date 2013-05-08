@@ -3,10 +3,12 @@ module Buraco
 
     attr_accessor :player, :deck  
 
-    def initialize(output, input)
+    def initialize(output, input, state_machine=StateMachine.new)
       @output = output
       @input = input
       @teams = []
+
+      state_machine.add_observer self
     end
 
     def start
@@ -43,6 +45,9 @@ module Buraco
       (1..cards_quantity).each do |c|
         player.hand_cards << @deck.pick_card 
       end
+    end
+
+    def update(status, state)
     end
 
   end

@@ -3,8 +3,8 @@ require 'spec_helper'
 module Buraco
   describe Game do
 
-    let(:input) { double('input').as_null_object }
-    let(:output) { double('output').as_null_object }
+    let(:input) { double(:input).as_null_object }
+    let(:output) { double(:output).as_null_object }
     let(:game) { Game.new(output, input) }
 
     describe "#start" do
@@ -137,6 +137,17 @@ module Buraco
         game.teams[1].should be_eql team2
       end
 
+    end
+
+    describe "#state changes" do
+
+      it "deveria registrar o Game como observador das mudancas de estado" do
+        state_machine = double(:state_machine).as_null_object
+
+        state_machine.should_receive(:add_observer).with(kind_of(Game))
+
+        @game = Game.new input, output, state_machine
+      end
     end
 
   end
