@@ -93,7 +93,20 @@ module Buraco
 
         state_machine.current.should be_eql [:play_cards, :discard_card]
       end
+    end
+
+    describe "#as observable" do
+
+      it 'deveria poder ser observado quando houver mudanca de estados' do
+        state_observer = double(:state_observer).as_null_object
+        
+        state_observer.should_receive(:update).with(:state_changed, :shuffle_deck)
+
+        state_machine.add_observer state_observer
+        state_machine.next
+      end
 
     end
+
   end
 end

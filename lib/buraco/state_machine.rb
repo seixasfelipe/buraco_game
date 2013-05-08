@@ -1,5 +1,8 @@
+require 'observer'
+
 module Buraco
   class StateMachine
+    include Observable
 
     def initialize
       @states = create_states
@@ -14,6 +17,10 @@ module Buraco
       state ||= @current_state
 
       @current_state = @states[state] unless @states[state] == nil
+
+      changed
+      notify_observers(:state_changed, @current_state)
+
       @current_state
     end
 
