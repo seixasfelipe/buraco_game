@@ -6,6 +6,7 @@ module Buraco
     def initialize(output, input)
       @output = output
       @input = input
+      @teams = []
     end
 
     def start
@@ -17,6 +18,15 @@ module Buraco
       @output.puts "Oi #{@player.name}!"
 
       @deck = Deck.new
+    end
+
+    def init team1, team2
+      @teams << team1
+      @teams << team2
+    end
+
+    def teams
+      @teams
     end
 
     def shuffle_deck
