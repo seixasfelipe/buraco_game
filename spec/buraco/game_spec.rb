@@ -127,13 +127,14 @@ module Buraco
         player1 = Player.new "Marotinus"
         player2 = Player.new "GrandMoulin"
 
-
         team1 = Team.new player1
         team2 = Team.new player2
 
         game.init team1, team2
         
         game.teams.should have_exactly(2).teams
+        game.teams[0].should be_eql team1
+        game.teams[1].should be_eql team2
       end
 
     end
