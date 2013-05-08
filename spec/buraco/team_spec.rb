@@ -22,6 +22,11 @@ module Buraco
       @team.players.should have_exactly(2).players
     end
 
+    it 'deveria conter o jogador passado durante a criacao do time' do
+      @team.players[0].name.should be_eql @player1.name
+      @team.players[1].name.should be_eql @player2.name
+    end
+
     it 'deveria adicionar 10 pontos pro time' do
       @team.add_points 10
       @team.points.should be_eql 10
