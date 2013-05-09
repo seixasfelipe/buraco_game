@@ -39,6 +39,13 @@ module Buraco
         deck.shuffled?.should be_false
       end
 
+      it "deveria embaralhar as cartas" do
+        initial_cards = deck.cards.clone
+        deck.shuffle
+        deck.shuffled?.should be_true
+        deck.cards.should_not be_eql initial_cards
+      end
+
     end
 
   end
