@@ -7,8 +7,9 @@ module Buraco
       @output = output
       @input = input
       @teams = []
+      @state_machine = state_machine
 
-      state_machine.add_observer self
+      @state_machine.add_observer self
     end
 
     def start
@@ -22,9 +23,13 @@ module Buraco
       @deck = Deck.new
     end
 
-    def init team1, team2
+    def init(team1, team2, deck=Deck.new)
       @teams << team1
       @teams << team2
+
+      @deck = deck
+
+      @state_machine.next
     end
 
     def teams
@@ -45,9 +50,10 @@ module Buraco
       (1..cards_quantity).each do |c|
         player.hand_cards << @deck.pick_card 
       end
-    end
+    end 
 
     def update(status, state)
+      @deck.shuffle if state == :shuffle_deck
     end
 
   end

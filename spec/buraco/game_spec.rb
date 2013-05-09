@@ -3,6 +3,8 @@ require 'spec_helper'
 module Buraco
   describe Game do
 
+    let(:team1) { Team.new(Player.new "Marotinus") }
+    let(:team2) { Team.new(Player.new "GrandMoulin") }
     let(:input) { double(:input).as_null_object }
     let(:output) { double(:output).as_null_object }
     let(:game) { Game.new(output, input) }
@@ -33,60 +35,6 @@ module Buraco
         
         game.start
       end
-    end
-
-    describe "#shuffle deck" do
-      
-      let(:input) { double('input').as_null_object }
-      let(:output) { double('output').as_null_object }
-      let(:game) { Game.new(output, input) }
-
-
-      before(:each) do
-        input.should_receive(:gets).and_return('Josicreia')
-
-        game.start
-      end
-
-      it "deveria ter 1 deck com 2 baralhos com 52 cartas cada" do
-        game.deck.count.should == 104
-      end
-      
-      it "cada carta do deck deveria ser do tipo Buraco::Card" do
-        game.deck.cards[0].should be_is_a Buraco::Card
-      end
-
-      it "deveria ter no deck 26 cartas do naipe - copas" do
-        cards = DeckHelper.select game.deck.cards, :of => :hearts
-        cards.should have_exactly(26).cards
-      end
-
-      it "deveria ter no deck 26 cartas do naipe - ouros" do
-        cards = DeckHelper.select game.deck.cards, :of => :diamonds
-        cards.should have_exactly(26).cards
-      end
-
-      it "deveria ter no deck 26 cartas do naipe - paus" do
-        cards = DeckHelper.select game.deck.cards, :of => :clubs
-        cards.should have_exactly(26).cards
-      end
-
-      it "deveria ter no deck 26 cartas do naipe - espadas" do
-        cards = DeckHelper.select game.deck.cards, :of => :spades
-        cards.should have_exactly(26).cards
-      end
-
-      it "deveria ter as cartas desembaralhadas quando o deck for criado" do
-        game.deck.shuffled?.should be_false
-      end
-
-      it "deveria embaralhar as cartas" do
-        initial_cards = game.deck.cards.clone
-        game.deck.shuffle
-        game.deck.shuffled?.should be_true
-        game.deck.cards.should_not be_eql initial_cards
-      end
-
     end
 
     describe "#play" do
@@ -123,13 +71,6 @@ module Buraco
     describe "#players" do
 
       it "deveria ter 2 times de jogadores" do
-
-        player1 = Player.new "Marotinus"
-        player2 = Player.new "GrandMoulin"
-
-        team1 = Team.new player1
-        team2 = Team.new player2
-
         game.init team1, team2
         
         game.teams.should have_exactly(2).teams
@@ -146,9 +87,20 @@ module Buraco
 
         state_machine.should_receive(:add_observer).with(kind_of(Game))
 
-        @game = Game.new input, output, state_machine
+        new_game = Game.new input, output, state_machine
       end
+
+      it "deveria embaralhar o baralho antes de comecar o jogo" do
+
+        deck = Deck.new
+        deck.should_receive(:shuffle)
+
+        game.init team1, team2, deck
+      end
+
     end
+
+
 
   end
 end
