@@ -1,12 +1,13 @@
 module Buraco
   class Game
 
-    attr_accessor :player, :deck  
+    attr_accessor :player, :deck, :dead_cards
 
     def initialize(output, input, state_machine=StateMachine.new)
       @output = output
       @input = input
       @teams = []
+      @dead_cards = Array.new
       @state_machine = state_machine
 
       @state_machine.add_observer self
@@ -45,15 +46,31 @@ module Buraco
     end
 
     def give(cards_quantity, options={})
-      player = options[:to]
+      to = options[:to]
+      to = to.hand_cards if to.is_a? Player
 
       (1..cards_quantity).each do |c|
-        player.hand_cards << @deck.pick_card 
+        to << @deck.pop_card 
       end
-    end 
+    end
 
     def update(status, state)
-      @deck.shuffle if state == :shuffle_deck
+      if state == :shuffle_deck
+        @deck.shuffle
+        @state_machine.next
+      end
+
+      if state == :give_dead_cards
+        give_dead_cards
+      end
+    end
+
+    def give_dead_cards
+      2.times do
+        cards = Array.new
+        (1..11).each { |c| cards << @deck.pop_card }
+        @dead_cards << cards
+      end
     end
 
   end

@@ -32,7 +32,7 @@ module Buraco
       @is_shuffled = true
     end
 
-    def pick_card
+    def pop_card
       @cards.pop
     end
 

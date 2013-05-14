@@ -82,21 +82,39 @@ module Buraco
 
     describe "#state changes" do
 
-      it "deveria registrar o Game como observador das mudancas de estado" do
-        state_machine = double(:state_machine).as_null_object
+      describe "#observe state changes" do
+        it "deveria registrar o Game como observador das mudancas de estado" do
+          state_machine = double(:state_machine).as_null_object
 
-        state_machine.should_receive(:add_observer).with(kind_of(Game))
+          state_machine.should_receive(:add_observer).with(kind_of(Game))
 
-        new_game = Game.new input, output, state_machine
+          new_game = Game.new input, output, state_machine
+        end
       end
 
-      it "deveria embaralhar o baralho antes de comecar o jogo" do
+      describe "#do changes" do
 
-        deck = Deck.new
-        deck.should_receive(:shuffle)
+        def init_game
+          deck = Deck.new
+          game.init team1, team2, deck
+        end
 
-        game.init team1, team2, deck
-      end
+        it "deveria embaralhar o baralho quando o jogo iniciar" do
+          deck = Deck.new
+          deck.should_receive(:shuffle)
+
+          game.init team1, team2, deck
+        end
+
+        it "deveria separar o morto quando o jogo iniciar" do
+          init_game
+
+          game.dead_cards.should have_exactly(2).piles
+          game.dead_cards[0].should have_exactly(11).cards
+          game.dead_cards[1].should have_exactly(11).cards
+        end
+
+      end 
 
     end
 

@@ -2,5 +2,22 @@
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'buraco'
 
-game = Buraco::Game.new(STDOUT, STDIN)
-game.start
+module Buraco
+
+game = Game.new(STDOUT, STDIN)
+game.init(
+  Team.new(Player.new("Marotinus")),
+  Team.new(Player.new("Moulin"))
+)
+# create deck
+# shuffle deck
+# give dead cards
+# give players cards
+# change player (start playing)
+# draw card
+game.draw_card from: [:deck, :junk]
+# play cards or discard card
+game.play_cards [Card, Card, Card], to: [:new_game, { game: 12, position: 10 }]
+game.discard_card Card
+
+end
