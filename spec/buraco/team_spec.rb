@@ -9,30 +9,30 @@ module Buraco
       @team = Team.new @player1, @player2
     end
 
-    it 'deveria comecar com pontos 0' do
+    it 'should start with 0 points' do
       @team.points.should be_eql 0
     end
 
-    it 'deveria ter somente 1 jogador' do
+    it 'should have one player' do
       @team = Team.new @player1
       @team.players.should have_exactly(1).player
     end
 
-    it 'deveria ter 2 jogadores' do
+    it 'should have two players' do
       @team.players.should have_exactly(2).players
     end
 
-    it 'deveria conter o jogador passado durante a criacao do time' do
+    it 'should put players inside team' do
       @team.players[0].name.should be_eql @player1.name
       @team.players[1].name.should be_eql @player2.name
     end
 
-    it 'deveria adicionar 10 pontos pro time' do
+    it 'should add 10 points to team' do
       @team.add_points 10
       @team.points.should be_eql 10
     end
 
-    it 'deveria remover 50 pontos do time' do
+    it 'should remove 50 points to team' do
       @team.add_points 10
       @team.add_points -50
       @team.points.should be_eql -40

@@ -7,39 +7,39 @@ module Buraco
 
     describe "#shuffle" do
 
-      it "deveria ter 1 deck com 2 baralhos com 52 cartas cada" do
+      it "should have 1 deck with 2 full decks of cards (52 cards each)" do
         deck.count.should == 104
       end
       
-      it "cada carta do deck deveria ser do tipo Buraco::Card" do
+      it "each deck card should be of Buraco::Card" do
         deck.cards[0].should be_is_a Buraco::Card
       end
 
-      it "deveria ter no deck 26 cartas do naipe - copas" do
+      it "should have 26 cards of suit - hearts" do
         cards = DeckHelper.select deck.cards, :of => :hearts
         cards.should have_exactly(26).cards
       end
 
-      it "deveria ter no deck 26 cartas do naipe - ouros" do
+      it "should have 26 cards of suit - diamonds" do
         cards = DeckHelper.select deck.cards, :of => :diamonds
         cards.should have_exactly(26).cards
       end
 
-      it "deveria ter no deck 26 cartas do naipe - paus" do
+      it "should have 26 cards of suit - clubs" do
         cards = DeckHelper.select deck.cards, :of => :clubs
         cards.should have_exactly(26).cards
       end
 
-      it "deveria ter no deck 26 cartas do naipe - espadas" do
+      it "should have 26 cards of suit - spades" do
         cards = DeckHelper.select deck.cards, :of => :spades
         cards.should have_exactly(26).cards
       end
 
-      it "deveria ter as cartas desembaralhadas quando o deck for criado" do
+      it "should have cards unshuffled during deck creation" do
         deck.shuffled?.should be_false
       end
 
-      it "deveria embaralhar as cartas" do
+      it "should shuffle cards" do
         initial_cards = deck.cards.clone
         deck.shuffle
         deck.shuffled?.should be_true

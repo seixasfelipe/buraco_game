@@ -7,44 +7,44 @@ module Buraco
 
     describe "#game states" do
 
-      it "deveria ter criar novo deck como primeiro estado" do
+      it "should create deck at inicial state" do
         state_machine.current.should be_eql :new_deck
       end
 
-      it "deveria embaralhar as cartas do deck APOS te-lo criado" do
+      it "should shuffle deck cards AFTER its creation" do
         state_machine.next
         state_machine.current.should be_eql :shuffle_deck
       end
 
-      it "deveria distribuir os 2 mortos APOS embaralhar o deck" do
+      it "should distribute the 2 dead cards deck AFTER shuffle deck" do
         2.times { state_machine.next }
         state_machine.current.should be_eql :give_dead_cards
       end
 
-      it "deveria distribuir as cartas aos jogadores APOS distribuir o morto" do
+      it "should distribute cards to players AFTER distribute dead cards deck" do
         3.times { state_machine.next }
         state_machine.current.should be_eql :give_players_cards
       end
 
-      it "deveria comecar o jogo APOS distribuir o morto" do
+      it "should start game AFTER distribute dead cards deck" do
         4.times { state_machine.next }
         state_machine.current.should be_eql :start_game
       end
 
-      it "deveria mudar de jogador ao comecar o jogo" do
+      it "should change player when game starts" do
         state_machine.skip_to :start_game
         state_machine.next
 
         state_machine.current.should be_eql :change_player
       end
 
-      it "deveria permanecer no mesmo estado caso nao exista o estado solicitado" do
+      it "should hold same state if a given state does not exist" do
         state_machine.current.should be_eql :new_deck
         state_machine.next :invalid_state
         state_machine.current.should be_eql :new_deck
       end
 
-      it "deveria contar os pontos quando o jogo terminar" do
+      it "should count points when the game ends" do
         state_machine.skip_to :end_game
         state_machine.next
 
@@ -55,22 +55,22 @@ module Buraco
 
     describe "#player states" do
 
-      it "deveria comprar uma carta pelo jogador da vez" do
+      it "should buy one card by current player" do
         state_machine.skip_to :change_player
         state_machine.next
 
         state_machine.current.should be_eql :draw_card
       end
 
-      it "deveria descer um jogo OU descartar uma carta APOS comprar uma carta" do
+      it "should play cards OR discard one card AFTER buy one card" do
         state_machine.skip_to :draw_card
         state_machine.next
         
         state_machine.current.should be_eql [:play_cards, :discard_card]
       end
 
-      it "deveria mudar de jogador OU terminar o jogo OU comprar o morto \
-          APOS descartar uma carta" do
+      it "should change player OR end game OR buy dead cards deck \
+          AFTER discard one card" do
         state_machine.skip_to :draw_card
         state_machine.next :discard_card
 
@@ -78,8 +78,8 @@ module Buraco
           :draw_dead_cards]
       end
 
-      it "deveria descer um jogo OU descartar uma carta OU comprar o morto \
-          OU terminar o jogo APOS descer um jogo" do
+      it "should play cards OR discard one card OR buy dead cards deck \
+          OR end game AFTER play cards" do
         state_machine.skip_to :draw_card
         state_machine.next :play_cards
 
@@ -87,7 +87,7 @@ module Buraco
           :draw_dead_cards, :end_game]
       end
 
-      it "deveria descer um jogo OU descartar uma carta APOS comprar o morto" do
+      it "should play card OR discard one card AFTER buy dead cards deck" do
         state_machine.skip_to :draw_dead_cards
         state_machine.next
 
@@ -97,7 +97,7 @@ module Buraco
 
     describe "#as observable" do
 
-      it 'deveria poder ser observado quando houver mudanca de estados' do
+      it "should be observed whenever there is a state change" do
         state_observer = double(:state_observer).as_null_object
         
         state_observer.should_receive(:update).with(:state_changed, :shuffle_deck)

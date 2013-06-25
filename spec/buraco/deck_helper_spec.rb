@@ -14,26 +14,26 @@ module Buraco
     end
 
     describe "#create_cards" do
-      it "deveria criar cartas de A a K dado um naipe - copas" do
+      it "should create cards from A to K of a given suit - hearts" do
         cards_expectation_of(:hearts)
       end
 
-      it "deveria criar cartas de A a K dado um naipe - ouros" do
+      it "should create cards from A to K of a given suit - diamonds" do
         cards_expectation_of(:diamonds)
       end
 
-      it "deveria criar cartas de A a K dado um naipe - paus" do
+      it "should create cards from A to K of a given suit - clubs" do
         cards_expectation_of(:clubs)
       end
 
-      it "deveria criar cartas de A a K dado um naipe - espadas" do
+      it "should create cards from A to K of a given suit - spades" do
         cards_expectation_of(:spades)
       end
     end
 
     describe "#manipulate_cards" do
 
-      it "deveria selecionar cartas de um dado naipe" do
+      it "should select cards of a given suit" do
         cards =  get_cards of: :hearts
         cards.concat get_cards of: :clubs
 
@@ -45,7 +45,7 @@ module Buraco
         end
       end
 
-      it "deveria selecionar nenhuma carta dado um naipe que nao exista na colecao" do
+      it "should select no cards if a given suit doesnt exist in the collection" do
         cards = get_cards of: :hearts
 
         selected_cards = DeckHelper.select cards, of: :clubs
@@ -58,7 +58,7 @@ module Buraco
         selected_cards.should have_exactly(0).cards
       end
       
-      it "deveria ordenar as cartas" do
+      it "should order cards" do
         cards =  get_cards of: :hearts
         cards.concat get_cards of: :clubs
         cards.concat get_cards of: :diamonds
